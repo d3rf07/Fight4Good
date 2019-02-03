@@ -230,11 +230,14 @@ class Game {
     
 
     // MARK: nowFightP1
-    func fighterSelection(currentTeam: Team) -> (Team, Team) {
+    func fighterSelection(currentTeam: Team) {
         
         var opponentTeam: Team
         
-        if (currentTeam.name == team1.name ) {
+        //if (currentTeam.name == team1.name ) { ????????????????
+        
+        //=== operator checks if the references point the same instance, "identical to"
+        if (currentTeam === team1 ) {
             
            opponentTeam = team2
         }
@@ -253,7 +256,7 @@ class Game {
 
 
 
-        var input:String? = readLine()
+        let input:String? = readLine()
 
         switch input {
 
@@ -266,84 +269,17 @@ class Game {
             default :
                 print("\(currentTeam.name), select your player")
             }
+        
 
         if (currentTeam.giver.playerType == "Mage") {
-
-            print("You selected \(currentTeam.giver.playerName), the mage.")
-
-            print (" 1 - Player Name : \(currentTeam.members[0].playerName)      Player Type \(currentTeam.members[0].playerType)     Player Life \(currentTeam.members[0].playerLife)\n",
-                "2 - Player Name : \(currentTeam.members[1].playerName)      Player Type \(currentTeam.members[1].playerType)     Player Life \(currentTeam.members[1].playerLife)\n",
-                "3 - Player Name : \(currentTeam.members[2].playerName)      Player Type \(currentTeam.members[2].playerType)     Player Life \(currentTeam.members[2].playerLife)\n")
-            print("\(currentTeam.name),  Who you want to heal ?")
-
-
-            input = readLine()
-
-            switch input {
-
-            case "1" :
-                currentTeam.receiver = currentTeam.members[0]
-            case "2" :
-                currentTeam.receiver = currentTeam.members[1]
-            case "3" :
-                currentTeam.receiver = currentTeam.members[2]
-            default :
-                print("\(currentTeam.name), Who you want to heal ?")
-                
-                
-//            switch (currentTeam.receiver.playerType) {
-//
-//            case TYPE_FIGHTER :
-//                
-//            case TYPE_MAGE:
-//            case TYPE_COLOSSUS :
-//            case TYPE_DWARF :
-//            case TYPE_DRAGON :
-//                    print("Sorry, this player is healthy enough, nothing will happen")
-//
-//                } else {
-//                    print("\(currentTeam.giver.playerName) will heal \(currentTeam.receiver.playerName)")
-//                    currentTeam.receiver.playerLife = currentTeam.receiver.playerLife - currentTeam.giver.playerWeapon.damage
-//                }
             
+            currentTeam.giver.healing(currentTeam: currentTeam)// appel d'une fonction mage dans la classe Character
+
+        } else {
+            
+            currentTeam.giver.realAttack(currentTeam: currentTeam, opponentTeam: opponentTeam)
+
         }
-
-        else {
-            print("\(currentTeam.giver.playerName) will fight !")
-
-
-            print (" 1 - Player Name : \(opponentTeam.members[0].playerName)      Player Type \(opponentTeam.members[0].playerType)     Player Life \(opponentTeam.members[0].playerLife)\n",
-                "2 - Player Name : \(opponentTeam.members[1].playerName)      Player Type \(opponentTeam.members[1].playerType)     Player Life \(opponentTeam.members[1].playerLife)\n",
-                "3 - Player Name : \(opponentTeam.members[2].playerName)      Player Type \(opponentTeam.members[2].playerType)     Player Life \(opponentTeam.members[2].playerLife)\n")
-
-            print("\(currentTeam.name), select your target")
-
-            input = readLine()
-
-            switch input {
-
-            case "1" :
-                opponentTeam.receiver = opponentTeam.members[0]
-            case "2" :
-                opponentTeam.receiver = opponentTeam.members[1]
-            case "3" :
-                opponentTeam.receiver = opponentTeam.members[2]
-            default :
-                print("\(currentTeam.name), select your target")
-               
-            }
-
-        print("\(currentTeam.giver.playerName) will fight \(opponentTeam.receiver.playerName)")
-            
-            print("You will hit with a power of : \(currentTeam.giver.playerWeapon!.damage)")
-            
-            opponentTeam.receiver.playerLife = opponentTeam.receiver.playerLife - currentTeam.giver.playerWeapon!.damage
-
-        print("Life of \(opponentTeam.receiver.playerName) is now \(opponentTeam.receiver.playerLife).")
-        }
-        
-        
-        return (currentTeam, opponentTeam)
         
     } //end func memberSelection()
 
