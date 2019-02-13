@@ -13,6 +13,7 @@
 		667514672113697A0086EC3F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667514662113697A0086EC3F /* main.swift */; };
 		6675146E211385530086EC3F /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6675146D211385530086EC3F /* Characters.swift */; };
 		EC46E32121E8D51F008928F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC46E32021E8D51F008928F1 /* Constants.swift */; };
+		ECB51BE8220B3C5B00B342D6 /* DuplicateNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB51BE7220B3C5B00B342D6 /* DuplicateNames.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		667514662113697A0086EC3F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6675146D211385530086EC3F /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		EC46E32021E8D51F008928F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ECB51BE7220B3C5B00B342D6 /* DuplicateNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNames.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				661F56A42179D51B008428F8 /* Weapon.swift */,
 				6675146D211385530086EC3F /* Characters.swift */,
 				66092549211C700400B1F02F /* Team.swift */,
+				ECB51BE7220B3C5B00B342D6 /* DuplicateNames.swift */,
 				EC46E32021E8D51F008928F1 /* Constants.swift */,
 			);
 			path = FightForGood;
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECB51BE8220B3C5B00B342D6 /* DuplicateNames.swift in Sources */,
 				6609254A211C700400B1F02F /* Team.swift in Sources */,
 				661F56A52179D51B008428F8 /* Weapon.swift in Sources */,
 				667514672113697A0086EC3F /* main.swift in Sources */,
