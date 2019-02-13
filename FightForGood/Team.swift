@@ -14,9 +14,10 @@ var name: String
     
 var members = [Characters]()
     
-var member1: Characters!
-var member2: Characters!
-var member3: Characters!
+//var member1: Characters!
+//var member2: Characters!
+//var member3: Characters!
+    
 var giver: Characters!
 var receiver: Characters!
     
