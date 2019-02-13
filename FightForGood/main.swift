@@ -93,7 +93,7 @@ print("")
 print("welcome \(team2.members[1].playerName), the \(team2.members[1].playerType)")
 print("")
 
-team2.members.append(game.teamMembersSelection(rank: "fird"))
+team2.members.append(game.teamMembersSelection(rank: "third"))
 print("")
 print("welcome \(team2.members[2].playerName), the \(team2.members[2].playerType)")
 print("")
