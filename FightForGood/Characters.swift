@@ -59,23 +59,35 @@ class Characters {
         } else { print("\(currentTeam.members[2].playerName) is dead.") }
         
 //
-        print("\(currentTeam.name),  Who you want to heal ?")
+        print("\(currentTeam.name),  Who do you want to heal ?")
+        
+     
+        /// Comment boucler pour demander un autre joueur si il est deja mort sans faire un appel a readLine à chaque boucle
         
         
         let input = readLine()
+       
+        var okToPlay: Bool = false
         
-        switch input {
+        repeat {
+            switch input {
             
-        case "1" :
-            currentTeam.receiver = currentTeam.members[0]
-        case "2" :
-            currentTeam.receiver = currentTeam.members[1]
-        case "3" :
-            currentTeam.receiver = currentTeam.members[2]
+            case "1" :
+                currentTeam.receiver = currentTeam.members[0]
+                if !currentTeam.members[0].playerIsAlive { print("You can't heal \(currentTeam.members[0].playerName), he is dead already.  ")
+                } else { okToPlay = true }
+            case "2" :
+                currentTeam.receiver = currentTeam.members[1]
+                if !currentTeam.members[1].playerIsAlive { print("You can't heal \(currentTeam.members[1].playerName), he is dead already.  ")
+                } else { okToPlay = true }
+            case "3" :
+                currentTeam.receiver = currentTeam.members[2]
+                if !currentTeam.members[2].playerIsAlive { print("You can't heal \(currentTeam.members[2].playerName), he is dead already.  ")
+                } else { okToPlay = true }
         default :
             print("\(currentTeam.name), Who you want to heal ?")
-        }
-        
+            } //end of switch
+        } while okToPlay == false //end of repeat
 //            switch (currentTeam.receiver.playerType) {
 //
 //            case TYPE_FIGHTER :
@@ -148,10 +160,10 @@ class Characters {
         
         
         if (opponentTeam.receiver.playerIsAlive) {
-            print("Life of \(opponentTeam.receiver.playerName) is now \(opponentTeam.receiver.playerLife).")
+            print("Life of \(opponentTeam.receiver.playerName) is now \(opponentTeam.receiver.playerLife).\n\n")
             
         } else {
-            print("\(opponentTeam.receiver.playerName) is dead.")
+            print("1 - \(opponentTeam.receiver.playerName) is dead.\n\n")
         }
         
 //        isAlive(opponentTeam: opponentTeam)
