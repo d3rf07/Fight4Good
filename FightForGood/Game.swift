@@ -11,8 +11,8 @@ import Foundation
 class Game {
 
     
-    ///Turn counter
-    var turnCounter = 1
+    ///Round counter
+    var roundCounter = 1
     
     
     
@@ -334,10 +334,27 @@ class Game {
         
         print ("Now you'll have to fight !\n")
         
-        print (" 1 - Player Name : \(currentTeam.members[0].playerName)      Player Type \(currentTeam.members[0].playerType)     Player Life \(currentTeam.members[0].playerLife)\n",
-                "2 - Player Name : \(currentTeam.members[1].playerName)      Player Type \(currentTeam.members[1].playerType)     Player Life \(currentTeam.members[1].playerLife)\n",
-                "3 - Player Name : \(currentTeam.members[2].playerName)      Player Type \(currentTeam.members[2].playerType)     Player Life \(currentTeam.members[2].playerLife)\n")
         
+        
+        if currentTeam.members[0].playerIsAlive {
+            print (" 1 - Player Name : \(currentTeam.members[0].playerName)      Player Type \(currentTeam.members[0].playerType)     Player Life \(currentTeam.members[0].playerLife)")
+        } else { print("1 - \(currentTeam.members[0].playerName) is dead.") }
+        
+        if currentTeam.members[1].playerIsAlive {
+            print (" 2 - Player Name : \(currentTeam.members[1].playerName)      Player Type \(currentTeam.members[1].playerType)     Player Life \(currentTeam.members[1].playerLife)")
+        } else { print("2 - \(currentTeam.members[1].playerName) is dead.") }
+        
+        if currentTeam.members[2].playerIsAlive {
+            print (" 3 - Player Name : \(currentTeam.members[2].playerName)      Player Type \(currentTeam.members[2].playerType)     Player Life \(currentTeam.members[2].playerLife)")
+        } else { print("3 - \(currentTeam.members[2].playerName) is dead.") }
+        
+        
+        
+        
+//        print (" 1 - Player Name : \(currentTeam.members[0].playerName)      Player Type \(currentTeam.members[0].playerType)     Player Life \(currentTeam.members[0].playerLife)\n",
+//                "2 - Player Name : \(currentTeam.members[1].playerName)      Player Type \(currentTeam.members[1].playerType)     Player Life \(currentTeam.members[1].playerLife)\n",
+//                "3 - Player Name : \(currentTeam.members[2].playerName)      Player Type \(currentTeam.members[2].playerType)     Player Life \(currentTeam.members[2].playerLife)\n")
+//
         print("\(currentTeam.name), select your player")
 
 
@@ -487,8 +504,8 @@ class Game {
     func theFightItself() {
         
         repeat {
-            print("Round \(turnCounter)")
-            turnCounter = +1
+            print("Round \(roundCounter)")
+            roundCounter = +1
             if (isEven == true) {game.fighterSelection(currentTeam: team2); isEven = false;  print(isEven)}
             else {game.fighterSelection(currentTeam: team1); isEven = true;  print(isEven)}                 //end of theFigtItself
             
