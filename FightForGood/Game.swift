@@ -11,6 +11,10 @@ import Foundation
 class Game {
 
     
+    ///Turn counter
+    var turnCounter = 1
+    
+    
     
     //Quick set of genral Var
     let emptyLine = " \n"
@@ -105,6 +109,7 @@ class Game {
 
 
     func teamNameChoice(playerName: String) -> String  {
+ //       var duplicate: Bool = false
         var inputOK: Bool = false
         var returnValue = ""
         print("\(playerName) choose your team name : ", terminator: "")
@@ -114,9 +119,13 @@ class Game {
                     inputOK = false
                     print("Team name is mandatory, please \(playerName) choose your team name !")
                     print("")
-                } else {
+                } else if checkDuplicate(input: keyboardInput) {
+                    print("This name is already taken, try again")
+                }
+                else {
                     inputOK = true
                     returnValue = keyboardInput
+                    duplicateNames.memTeamNames.append(keyboardInput.uppercased())
                 } // end of : if keyboardInput.isEmpty
             } // end of : if let keyboardInput = readLine()
         }  while !inputOK  // end of : repeat
@@ -131,6 +140,9 @@ class Game {
         
         let currentCharacter = Characters()
         
+        //variable of input verification
+        var isInputOk: Bool = false
+        
     
         print("Now you will have to select the \(rank) characters from the 4 existing types\n")
         
@@ -142,50 +154,102 @@ class Game {
         print("")
         print("Select your \(rank) character's type : ", terminator: "")
         
-        var input = readLine()
-        
-        while input!.isEmpty {
-            print("")
-            print("Please, select your \(rank) character's type")
-            input = readLine()
-        }
+//        while input!.isEmpty {
+//            print("")
+//            print("Please, select your \(rank) character's type")
+//            input = readLine()
+//        }
 
-
-        
-        switch input {
-        case "1" :
-            currentCharacter.playerType = "Fighter"
-            currentCharacter.playerWeapon = Sword()
-        case "2" :
-            currentCharacter.playerType = "Mage"
-            currentCharacter.playerWeapon = Magic()
-        case "3" :
-            currentCharacter.playerType = "Colossus"
-            currentCharacter.playerWeapon = Sledgehammer()
-        case "4" :
-            currentCharacter.playerType = "Dwarf"
-            currentCharacter.playerWeapon = Axe()
-        default :
-            print("\n Please, select your character's type")
-            input = readLine()
+        repeat {
             
-        }
+            if let inputKeybord = readLine() {
+                
+                switch inputKeybord {
+                    
+                    case "1" :
+                        isInputOk = true
+                        currentCharacter.playerType = constants.TYPE_FIGHTER
+                        currentCharacter.playerWeapon = Sword()
+                    case "2" :
+                        isInputOk = true
+                        currentCharacter.playerType = constants.TYPE_MAGE
+                        currentCharacter.playerWeapon = Magic()
+                    case "3" :
+                        isInputOk = true
+                        currentCharacter.playerType = constants.TYPE_COLOSSUS
+                        currentCharacter.playerWeapon = Sledgehammer()
+                    case "4" :
+                        isInputOk = true
+                        currentCharacter.playerType = constants.TYPE_DWARF
+                        currentCharacter.playerWeapon = Axe()
+                    default:
+                        isInputOk = false
+                        print("Try again !\n")
+                } // end of : switch role
+            } // end of : if let inputKeybord = readLine()
+        } while isInputOk == false
+        
+        
+        
+        
+
+
+        
+        
+//        var input = readLine()
+//
+//        while input!.isEmpty {
+//            print("Anonymous players are not allowed, please, choose your player name. \n")
+//            input = readLine()
+//        }
+//        currentCharacter.playerName = input!
+        
+        
         
         
         //affectation du nom
-        print("")
-        print(  "Ok now choose your \(rank) character name : ", terminator: "")
         
-        input = readLine()
-        
-        while input!.isEmpty {
-            print("Anonymous players are not allowed, please, choose your player name. \n")
-            input = readLine()
-        }
-        currentCharacter.playerName = input!
+//        //variable of input verification
+//        isInputOk = false
+//
+//        repeat {
+//
+//            if let inputKeybord = readLine() {
+//
+//                if inputKeybord.isEmpty {
+//                    isInputOk = false
+//                    print("Anonymous players are not allowed, please, choose your player name. \n")
+//                } else {
+//                    isInputOk = true
+//                    currentCharacter.playerName = inputKeybord
+//                } // end of : if inputKeybord.isEmpty
+//            } // end of : if let inputKeybord = readLine()
+//        } while isInputOk == false
         
 
+        
+        //setter player name
+            
+        var duplicate: Bool = false
+    
+        repeat {
+            print("")
+            print(  "Ok now choose your \(rank) character name : ", terminator: "")
+            if let inputKeybord = readLine() {
+                duplicate = checkDuplicate(input: inputKeybord)
+                if duplicate {
+                    print("This name is already taken, try again")
+                } else {
+                    currentCharacter.playerName = inputKeybord
+                    duplicateNames.memCharacterNames.append(inputKeybord.uppercased())
+                }
+            } //if let input = readLine()
+        } while duplicate == true // func setPlayerName()
 
+        
+        
+        
+        
         // autres infos
         
         switch currentCharacter.playerType {
@@ -212,6 +276,28 @@ class Game {
     } //End Of func teamMembersSelection
 
 
+    
+    // check if name is duplicate
+    func checkDuplicate(input: String) -> Bool {
+        
+        var duplicate: Bool = false
+        
+        //test if there is a duplicate name in the team and character
+        for ijk in 0..<duplicateNames.memCharacterNames.count {
+            if input.uppercased() == duplicateNames.memCharacterNames[ijk]  {
+                duplicate = true
+            }
+        }
+        
+        for ijk in 0..<duplicateNames.memTeamNames.count {
+            if input.uppercased() == duplicateNames.memTeamNames[ijk]  {
+                duplicate = true
+            }
+        }
+        
+        
+        return duplicate
+    } // end of : func checkDuplicate()
 
 //   func summary () {
 //
@@ -281,7 +367,7 @@ class Game {
 
         }
         
-    } //end func memberSelection()
+    } //end func fighterSelection()
 
     
 
@@ -401,10 +487,11 @@ class Game {
     func theFightItself() {
         
         repeat {
+            print("Round \(turnCounter)")
+            turnCounter = +1
+            if (isEven == true) {game.fighterSelection(currentTeam: team2); isEven = false;  print(isEven)}
+            else {game.fighterSelection(currentTeam: team1); isEven = true;  print(isEven)}                 //end of theFigtItself
             
-            if (isEven == true) {game.fighterSelection(currentTeam: team1); isEven = false;  print(isEven)}
-            else {game.fighterSelection(currentTeam: team2); isEven = true;  print(isEven)}                 //end of theFigtItself
- 
             } while stillAlive == true // End of repeat
            }
    
